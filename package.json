@@ -1,0 +1,21 @@
+{
+  "name": "image-uploader",
+  "version": "1.0.0",
+  "main": "index.ts",
+  "scripts": {
+    "dev": "concurrently 'cd server && yarn dev' 'cd client && yarn dev'",
+    "prepare": "husky install"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^17.1.2",
+    "@commitlint/config-conventional": "^17.1.0",
+    "@typescript-eslint/eslint-plugin": "^5.38.1",
+    "@typescript-eslint/parser": "^5.38.1",
+    "concurrently": "^7.3.0",
+    "eslint": "^8.24.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-react": "^7.31.8",
+    "husky": "^8.0.1",
+    "prettier": "^2.7.1"
+  }
+}

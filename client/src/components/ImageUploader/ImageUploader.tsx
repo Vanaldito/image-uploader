@@ -1,9 +1,11 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 import "./ImageUploader.css";
 
 export default function ImageUploader() {
-  const [image, setImage] = useState<DataTransferItem | null>(null);
+  const [image, setImage] = useState<DataTransferItem | File | null>(null);
+
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   function dropHandler<T>(event: React.DragEvent<T>) {
     event.preventDefault();
@@ -13,6 +15,18 @@ export default function ImageUploader() {
     if (event.dataTransfer.items[0].type.startsWith("image/")) {
       setImage(event.dataTransfer.items[0]);
     }
+  }
+
+  function changeHandler(event: React.ChangeEvent<HTMLInputElement>) {
+    if (!event.target.files || event.target.files.length === 0) return;
+
+    if (event.target.files[0].type.startsWith("image/")) {
+      setImage(event.target.files[0]);
+    }
+  }
+
+  function clickHandler() {
+    fileInputRef.current?.click();
   }
 
   return (
@@ -30,10 +44,14 @@ export default function ImageUploader() {
         <span draggable>Drag & Drop your image here</span>
       </div>
       <div className="image-uploader__or">Or</div>
-      <button className="image-uploader__choose-file-button">
+      <button
+        className="image-uploader__choose-file-button"
+        type="button"
+        onClick={clickHandler}
+      >
         Choose a file
       </button>
-      <input type="file" hidden />
+      <input ref={fileInputRef} type="file" hidden onChange={changeHandler} />
     </div>
   );
 }

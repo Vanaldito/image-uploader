@@ -33,7 +33,7 @@ export default function ImageUploader() {
       <button className="image-uploader__choose-file-button">
         Choose a file
       </button>
-      <input type="submit" hidden />
+      <input type="file" hidden />
     </div>
   );
 }

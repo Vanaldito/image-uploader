@@ -1,0 +1,44 @@
+.image-uploader {
+  width: max-content;
+  text-align: center;
+  width: min(320px, 100%);
+}
+
+.image-uploader__title {
+  font-size: 1.8rem;
+  margin-bottom: 10px;
+}
+
+.image-uploader__restrictions {
+  font-size: 1rem;
+  color: #464646;
+  margin-bottom: 15px;
+}
+
+.image-uploader__drop {
+  background-color: #f6f8fb;
+  color: #6a6666;
+  font-size: 1.2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 36px;
+  padding: 35px 20px;
+  border-radius: 12px;
+  border: 1px dashed #97bef4;
+  margin-bottom: 10px;
+}
+
+.image-uploader__or {
+  font-size: 1.2rem;
+  margin-bottom: 15px;
+  color: #6c6c6c;
+}
+
+.image-uploader__choose-file-button {
+  background-color: #2f80ed;
+  font-size: 1.2rem;
+  border: none;
+  border-radius: 8px;
+  color: #ffffff;
+  padding: 8px 16px;
+}

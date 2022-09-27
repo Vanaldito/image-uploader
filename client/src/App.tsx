@@ -1,5 +1,11 @@
+import { ImageUploader } from "./components/ImageUploader";
+
 import "./App.css";
 
 export default function App() {
-  return <h1>Upload App</h1>;
+  return (
+    <div className="app">
+      <ImageUploader />
+    </div>
+  );
 }

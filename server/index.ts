@@ -1,15 +1,23 @@
 import express from "express";
 import path from "path";
+import fileUpload from "express-fileupload";
 
 import assetsRouter from "./src/routes/assets";
 
 const app = express();
 
+app.use(express.json());
+app.use(fileUpload());
+
 if (process.env.NODE_ENV !== "production") {
   app.use(assetsRouter);
 }
 
-/* Add you routes here */
+app.post("/upload", req => {
+  const files = req.files;
+
+  console.log(files);
+});
 
 app.get("/*", (_req, res) => {
   res.sendFile(path.join(__dirname, "static/index.html"));

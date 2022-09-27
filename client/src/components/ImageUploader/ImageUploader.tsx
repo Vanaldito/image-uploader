@@ -3,14 +3,14 @@ import { useEffect, useRef, useState } from "react";
 import "./ImageUploader.css";
 
 export default function ImageUploader() {
-  const [image, setImage] = useState<DataTransferItem | File | null>(null);
+  const [image, setImage] = useState<File | null>(null);
 
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     if (image) {
       const data = new FormData();
-      data.append("image", image as Blob);
+      data.append("image", image);
 
       fetch("/upload", {
         method: "POST",
@@ -25,7 +25,7 @@ export default function ImageUploader() {
     if (event.dataTransfer.items.length === 0) return;
 
     if (event.dataTransfer.items[0].type.startsWith("image/")) {
-      setImage(event.dataTransfer.items[0]);
+      setImage(event.dataTransfer.items[0].getAsFile());
     }
   }
 

@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { uploadImage } from "../../services";
 
 import "./ImageUploader.css";
 
@@ -8,15 +9,9 @@ export default function ImageUploader() {
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
-    if (image) {
-      const data = new FormData();
-      data.append("image", image);
+    if (!image) return;
 
-      fetch("/upload", {
-        method: "POST",
-        body: data,
-      });
-    }
+    uploadImage(image);
   }, [image]);
 
   function dropHandler<T>(event: React.DragEvent<T>) {

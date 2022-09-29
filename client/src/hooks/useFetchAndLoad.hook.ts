@@ -33,7 +33,7 @@ export function useFetchAndLoad() {
     return () => {
       cancelCall();
     };
-  });
+  }, []);
 
   return { loading, callEndpoint };
 }

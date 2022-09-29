@@ -1,9 +1,17 @@
-export function uploadImage(image: File) {
+import { FetchCall } from "../models";
+
+export function uploadImage(image: File): FetchCall {
   const data = new FormData();
   data.append("image", image);
 
-  return fetch("/upload", {
-    method: "POST",
-    body: data,
-  });
+  const controller = new AbortController();
+
+  return {
+    call: fetch("/upload", {
+      method: "POST",
+      body: data,
+      signal: controller.signal,
+    }),
+    controller,
+  };
 }

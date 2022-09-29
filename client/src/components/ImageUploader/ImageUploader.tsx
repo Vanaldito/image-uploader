@@ -20,7 +20,7 @@ export default function ImageUploader() {
 
     if (!image) return;
 
-    callEndpoint({ call: uploadImage(image) });
+    callEndpoint(uploadImage(image));
   }
 
   function changeHandler(event: React.ChangeEvent<HTMLInputElement>) {
@@ -29,7 +29,7 @@ export default function ImageUploader() {
 
     const image = event.target.files[0];
 
-    callEndpoint({ call: uploadImage(image) });
+    callEndpoint(uploadImage(image));
   }
 
   function clickHandler() {

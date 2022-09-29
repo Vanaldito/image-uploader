@@ -17,6 +17,10 @@ if (process.env.NODE_ENV !== "production") {
 
 const miniDB: { [id: string]: ImageInfo } = {};
 
+app.get("/", (_req, res) => {
+  res.sendFile(path.join(__dirname, "static/index.html"));
+});
+
 app.post("/upload", (req, res) => {
   const files = req.files;
 
@@ -40,7 +44,7 @@ app.post("/upload", (req, res) => {
 });
 
 app.get("/*", (_req, res) => {
-  res.sendFile(path.join(__dirname, "static/index.html"));
+  res.status(404).sendFile(path.join(__dirname, "static/index.html"));
 });
 
 const PORT = 5000;

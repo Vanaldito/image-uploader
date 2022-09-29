@@ -21,6 +21,16 @@ app.get("/", (_req, res) => {
   res.sendFile(path.join(__dirname, "static/index.html"));
 });
 
+app.get("/:imgId", (req, res) => {
+  const { imgId } = req.params;
+
+  if (!(imgId in miniDB))
+    return res.status(404).json({ status: 404, error: "Image not found" });
+
+  res.write(miniDB[imgId].data);
+  res.end();
+});
+
 app.post("/upload", (req, res) => {
   const files = req.files;
 

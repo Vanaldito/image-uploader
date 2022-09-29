@@ -2,11 +2,12 @@ import { useRef } from "react";
 import { useFetchAndLoad } from "../../hooks";
 import { uploadImage } from "../../services";
 import { Loader } from "../Loader";
+import { ImageInfo } from "../../models";
 
 import "./ImageUploader.css";
 
 interface ImageUploaderProps {
-  setUploadedImage: (image: File) => void;
+  setUploadedImage: (image: ImageInfo) => void;
 }
 
 export default function ImageUploader({
@@ -30,7 +31,7 @@ export default function ImageUploader({
       .then(res => res.json())
       .then(data => {
         if (data.status === 200) {
-          setUploadedImage(image);
+          setUploadedImage({ image, imageId: data.imgId });
         }
       });
   }
@@ -45,7 +46,7 @@ export default function ImageUploader({
       .then(res => res.json())
       .then(data => {
         if (data.status === 200) {
-          setUploadedImage(image);
+          setUploadedImage({ image, imageId: data.imgId });
         }
       });
   }

@@ -4,12 +4,16 @@ import "./SuccessfulUpload.css";
 
 interface SuccessfulUploadProps {
   image: File;
+  imageId: string;
 }
 
-export default function SuccessfulUpload({ image }: SuccessfulUploadProps) {
+export default function SuccessfulUpload({
+  image,
+  imageId,
+}: SuccessfulUploadProps) {
   const link = `${window.location.protocol}//${window.location.hostname}${
     window.location.port ? `:${window.location.port}` : ""
-  }`;
+  }/${imageId}`;
 
   function clickHandler() {
     navigator.clipboard.writeText(link);

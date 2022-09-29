@@ -4,18 +4,24 @@ import {
   ImageUploader,
   SuccessfulUpload,
 } from "../../components";
+import { ImageInfo } from "../../models";
 
 export default function Home() {
-  const [uploadedImage, setUploadedImage] = useState<File | null>(null);
+  const [uploadedImageInfo, setUploadedImageInfo] = useState<ImageInfo | null>(
+    null
+  );
 
-  function uploadImage(image: File) {
-    setUploadedImage(image);
+  function uploadImage(imageInfo: ImageInfo) {
+    setUploadedImageInfo(imageInfo);
   }
 
   return (
     <AppContainer>
-      {uploadedImage ? (
-        <SuccessfulUpload image={uploadedImage} />
+      {uploadedImageInfo ? (
+        <SuccessfulUpload
+          image={uploadedImageInfo.image}
+          imageId={uploadedImageInfo.imageId}
+        />
       ) : (
         <ImageUploader setUploadedImage={uploadImage} />
       )}

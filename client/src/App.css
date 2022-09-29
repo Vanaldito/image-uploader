@@ -13,13 +13,3 @@ body,
 html {
   font-size: 12px;
 }
-
-.app {
-  min-height: 100%;
-  box-sizing: border-box;
-  padding: 40px;
-  background-color: #fafafb;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}

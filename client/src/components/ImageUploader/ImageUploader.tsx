@@ -36,40 +36,31 @@ export default function ImageUploader() {
     fileInputRef.current?.click();
   }
 
-  return (
+  return loading ? (
+    <Loader />
+  ) : (
     <div className="image-uploader">
-      {loading ? (
-        <Loader />
-      ) : (
-        <>
-          <h2 className="image-uploader__title">Upload your image</h2>
-          <div className="image-uploader__restrictions">
-            File should be Jpeg, Png,...
-          </div>
-          <div
-            className="image-uploader__drop"
-            onDragOver={event => event.preventDefault()}
-            onDrop={dropHandler}
-          >
-            <img src="/image.svg" />
-            <span draggable>Drag & Drop your image here</span>
-          </div>
-          <div className="image-uploader__or">Or</div>
-          <button
-            className="image-uploader__choose-file-button"
-            type="button"
-            onClick={clickHandler}
-          >
-            Choose a file
-          </button>
-          <input
-            ref={fileInputRef}
-            type="file"
-            hidden
-            onChange={changeHandler}
-          />
-        </>
-      )}
+      <h2 className="image-uploader__title">Upload your image</h2>
+      <div className="image-uploader__restrictions">
+        File should be Jpeg, Png,...
+      </div>
+      <div
+        className="image-uploader__drop"
+        onDragOver={event => event.preventDefault()}
+        onDrop={dropHandler}
+      >
+        <img src="/image.svg" />
+        <span draggable>Drag & Drop your image here</span>
+      </div>
+      <div className="image-uploader__or">Or</div>
+      <button
+        className="image-uploader__choose-file-button"
+        type="button"
+        onClick={clickHandler}
+      >
+        Choose a file
+      </button>
+      <input ref={fileInputRef} type="file" hidden onChange={changeHandler} />
     </div>
   );
 }

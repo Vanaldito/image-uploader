@@ -1,9 +1,9 @@
-import { ImageUploader } from "../../components";
+import { AppContainer, ImageUploader } from "../../components";
 
 export default function Home() {
   return (
-    <main className="app">
+    <AppContainer>
       <ImageUploader />
-    </main>
+    </AppContainer>
   );
 }

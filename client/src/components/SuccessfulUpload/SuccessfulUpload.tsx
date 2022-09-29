@@ -7,6 +7,14 @@ interface SuccessfulUploadProps {
 }
 
 export default function SuccessfulUpload({ image }: SuccessfulUploadProps) {
+  const link = `${window.location.protocol}//${window.location.hostname}${
+    window.location.port ? `:${window.location.port}` : ""
+  }`;
+
+  function clickHandler() {
+    navigator.clipboard.writeText(link);
+  }
+
   return (
     <div className="successful-upload">
       <SuccessfulIcon />
@@ -16,13 +24,12 @@ export default function SuccessfulUpload({ image }: SuccessfulUploadProps) {
         src={URL.createObjectURL(image)}
       />
       <div className="successful-upload__copy-link">
-        <div className="successful-upload__link">
-          {window.location.protocol}
-          {"//"}
-          {window.location.hostname}
-          {window.location.port && `:${window.location.port}`}
-        </div>
-        <button type="button" className="successful-upload__copy-link-button">
+        <div className="successful-upload__link">{link}</div>
+        <button
+          type="button"
+          onClick={clickHandler}
+          className="successful-upload__copy-link-button"
+        >
           Copy Link
         </button>
       </div>

@@ -1,4 +1,4 @@
-import { ImageUploader } from "../../components/ImageUploader";
+import { ImageUploader } from "../../components";
 
 export default function Home() {
   return (

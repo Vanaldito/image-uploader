@@ -1,3 +1,5 @@
+import { SuccessfulIcon } from "../Icons";
+
 import "./SuccessfulUpload.css";
 
 interface SuccessfulUploadProps {
@@ -7,6 +9,7 @@ interface SuccessfulUploadProps {
 export default function SuccessfulUpload({ image }: SuccessfulUploadProps) {
   return (
     <div className="successful-upload">
+      <SuccessfulIcon />
       <h2 className="successful-upload__title">Uploaded Successfully!</h2>
       <img
         className="successful-upload__image"

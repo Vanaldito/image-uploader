@@ -6,7 +6,7 @@ import mongoose from "mongoose";
 
 import assetsRouter from "./src/routes/assets";
 
-import { ImageInfo } from "./types";
+import { Image } from "./src/models/ImageInfo";
 
 const app = express();
 
@@ -19,22 +19,26 @@ if (process.env.NODE_ENV !== "production") {
   app.use(assetsRouter);
 }
 
-process.env.MONGODB_URI && mongoose.connect(process.env.MONGODB_URI);
-
-const miniDB: { [id: string]: ImageInfo } = {};
+process.env.MONGODB_URI &&
+  mongoose.connect(process.env.MONGODB_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  });
 
 app.get("/", (_req, res) => {
-  res.sendFile(path.join(__dirname, "static/index.html"));
+  res.status(200).sendFile(path.join(__dirname, "static/index.html"));
 });
 
 app.get("/:imgId", (req, res) => {
   const { imgId } = req.params;
 
-  if (!(imgId in miniDB))
-    return res.status(404).json({ status: 404, error: "Image not found" });
+  Image.findById(imgId, (_err, doc) => {
+    if (!doc)
+      return res.status(404).json({ status: 404, error: "Image not found" });
 
-  res.write(miniDB[imgId].data);
-  res.end();
+    res.status(200).write(doc.image);
+    res.end();
+  });
 });
 
 app.post("/upload", (req, res) => {
@@ -50,13 +54,15 @@ app.post("/upload", (req, res) => {
     return res.status(400).json({ status: 400, error: "File is not an image" });
   }
 
-  const imgId = `photo-${Date.now().toString(16)}`;
-  miniDB[imgId] = {
-    name: image.name,
-    data: image.data,
-  };
+  const imageDoc = new Image({ image: image.data });
+  imageDoc.save(undefined, err => {
+    if (err)
+      return res
+        .status(500)
+        .json({ status: 500, error: "Something has gone wrong" });
 
-  res.status(200).json({ status: 200, imgId });
+    res.status(200).json({ status: 200, imgId: imageDoc._id });
+  });
 });
 
 app.get("/*", (_req, res) => {

@@ -5,7 +5,13 @@ import { Loader } from "../Loader";
 
 import "./ImageUploader.css";
 
-export default function ImageUploader() {
+interface ImageUploaderProps {
+  setUploadedImage: (image: File) => void;
+}
+
+export default function ImageUploader({
+  setUploadedImage,
+}: ImageUploaderProps) {
   const { loading, callEndpoint } = useFetchAndLoad();
 
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -20,7 +26,13 @@ export default function ImageUploader() {
 
     if (!image) return;
 
-    callEndpoint(uploadImage(image));
+    callEndpoint(uploadImage(image))
+      .then(res => res.json())
+      .then(data => {
+        if (data.status === 200) {
+          setUploadedImage(image);
+        }
+      });
   }
 
   function changeHandler(event: React.ChangeEvent<HTMLInputElement>) {
@@ -29,7 +41,13 @@ export default function ImageUploader() {
 
     const image = event.target.files[0];
 
-    callEndpoint(uploadImage(image));
+    callEndpoint(uploadImage(image))
+      .then(res => res.json())
+      .then(data => {
+        if (data.status === 200) {
+          setUploadedImage(image);
+        }
+      });
   }
 
   function clickHandler() {

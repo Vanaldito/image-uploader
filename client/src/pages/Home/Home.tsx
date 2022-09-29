@@ -1,5 +1,9 @@
 import { useState } from "react";
-import { AppContainer, ImageUploader } from "../../components";
+import {
+  AppContainer,
+  ImageUploader,
+  SuccessfulUpload,
+} from "../../components";
 
 export default function Home() {
   const [uploadedImage, setUploadedImage] = useState<File | null>(null);
@@ -8,11 +12,13 @@ export default function Home() {
     setUploadedImage(image);
   }
 
-  return uploadedImage ? (
-    <img src={URL.createObjectURL(uploadedImage)} />
-  ) : (
+  return (
     <AppContainer>
-      <ImageUploader setUploadedImage={uploadImage} />
+      {uploadedImage ? (
+        <SuccessfulUpload image={uploadedImage} />
+      ) : (
+        <ImageUploader setUploadedImage={uploadImage} />
+      )}
     </AppContainer>
   );
 }

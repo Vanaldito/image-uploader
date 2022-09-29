@@ -1,0 +1,47 @@
+.successful-upload {
+  text-align: center;
+}
+
+.successful-upload__title {
+  font-size: 1.8rem;
+  margin-bottom: 20px;
+}
+
+.successful-upload__image {
+  width: 100%;
+  max-height: 350px;
+  object-fit: cover;
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+
+.successful-upload__copy-link {
+  display: flex;
+  align-items: center;
+  background-color: #f6f8fb;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 2px 2px 2px 13px;
+}
+
+.successful-upload__link {
+  font-size: 1.2rem;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  text-align: left;
+  flex-grow: 1;
+  padding-right: 5px;
+}
+
+.successful-upload__copy-link-button {
+  width: max-content;
+  font-size: 1.2rem;
+  padding: 12px 17px;
+  border-radius: 8px;
+  background-color: #2f80ed;
+  color: #ffffff;
+  border: none;
+  cursor: pointer;
+}

@@ -1,6 +1,8 @@
 import express from "express";
 import path from "path";
 import fileUpload, { UploadedFile } from "express-fileupload";
+import dotenv from "dotenv";
+import mongoose from "mongoose";
 
 import assetsRouter from "./src/routes/assets";
 
@@ -8,12 +10,16 @@ import { ImageInfo } from "./types";
 
 const app = express();
 
+dotenv.config({ path: `.env.${process.env.NODE_ENV}` });
+
 app.use(express.json());
 app.use(fileUpload());
 
 if (process.env.NODE_ENV !== "production") {
   app.use(assetsRouter);
 }
+
+process.env.MONGODB_URI && mongoose.connect(process.env.MONGODB_URI);
 
 const miniDB: { [id: string]: ImageInfo } = {};
 

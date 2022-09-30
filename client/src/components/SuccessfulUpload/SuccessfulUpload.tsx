@@ -13,7 +13,7 @@ export default function SuccessfulUpload({
 }: SuccessfulUploadProps) {
   const link = `${window.location.protocol}//${window.location.hostname}${
     window.location.port ? `:${window.location.port}` : ""
-  }/${imageId}`;
+  }/uploads/${imageId}`;
 
   function clickHandler() {
     navigator.clipboard.writeText(link);

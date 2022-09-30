@@ -29,7 +29,7 @@ app.get("/", (_req, res) => {
   res.status(200).sendFile(path.join(__dirname, "static/index.html"));
 });
 
-app.get("/:imgId", (req, res) => {
+app.get("uploads/:imgId", (req, res) => {
   const { imgId } = req.params;
 
   Image.findById(imgId, (_err, doc) => {

@@ -15,12 +15,14 @@ dotenv.config({ path: `.env.${process.env.NODE_ENV}` });
 app.use(express.json());
 app.use(fileUpload());
 
-if (process.env.NODE_ENV !== "production") {
+const { NODE_ENV, MONGODB_URI = "", PORT = 5000 } = process.env;
+
+if (NODE_ENV !== "production") {
   app.use(assetsRouter);
 }
 
-process.env.MONGODB_URI &&
-  mongoose.connect(process.env.MONGODB_URI, {
+MONGODB_URI &&
+  mongoose.connect(MONGODB_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   });
@@ -68,8 +70,6 @@ app.post("/upload", (req, res) => {
 app.get("/*", (_req, res) => {
   res.status(404).sendFile(path.join(__dirname, "static/index.html"));
 });
-
-const PORT = 5000;
 
 app.listen(PORT, () => {
   console.log();
